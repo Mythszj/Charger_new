@@ -1,0 +1,9 @@
+<view>
+  <mp-cell class="form_item" title="用户名">
+    <input bindinput="formInputChange" value="{{form.userName}}" data-field="userName" class="weui-input"  />
+  </mp-cell>
+  <mp-cell class="form_item" title="密码">
+    <input bindinput="formInputChange" value="{{form.userName}}" data-field="userName" class="weui-input"  />
+  </mp-cell>
+  <button bind:tap="buttonHandler">登录</button>
+</view>

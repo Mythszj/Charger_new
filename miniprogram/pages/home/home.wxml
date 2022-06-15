@@ -1,0 +1,5 @@
+<view>
+  <text class="title">状态: 正在充电/正在排队/叫号\n当前充电度数: 99\n还剩 1°充满\n当前充电费用:9.92元</text>
+  <button class="weui-btn" type="primary"  bind:tap="buttonHandler">我要充电</button>
+  <button class="weui-btn" type="primary">查询排队状态</button>
+</view>
