@@ -6,7 +6,8 @@
     "pages/fill/fill",
     "pages/history/history",
     "pages/register/register",
-    "pages/pay/pay"
+    "pages/pay/pay",
+    "pages/modify/modify"
   ],
   "window": {
     "backgroundTextStyle": "dark",
@@ -16,16 +17,20 @@
     "enablePullDownRefresh": false
   },
   "tabBar": {
-    "color": "#666666",
-    "selectedColor": "#06bd04",
+    "color": "#000",
+    "selectedColor": "#A3DEF0",
     "list": [
       {
         "pagePath": "pages/home/home",
-        "text": "首页"
+        "text": "首页",
+        "iconPath": "/images/gonggao.png",
+        "selectedIconPath": "/images/gonggao.png"
       },
       {
         "pagePath": "pages/my/my",
-        "text": "我的"
+        "text": "我的",
+        "iconPath": "/images/wode.png",
+        "selectedIconPath": "/images/wode.png"
       }
     ]
   },
