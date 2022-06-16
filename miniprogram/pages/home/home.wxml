@@ -1,24 +1,24 @@
 <view>
   <view wx:if="{{order.state==1}}" class="bigbox">
     <view class="cur">状态：当前没有操作</view>
-    <button class="btn" bindtap="buttonHandler">我要充电</button>
+    <button class="btn" bindtap="buttonHandler" data-state="{{order.state}}">我要充电</button>
   </view>
   <view wx:elif="{{order.state==2}}" class="bigbox">
     <view class="cur">状态：正在排队</view>
-    <button class="btn" bindtap="buttonHandler">修改充电信息</button>
-    <button class="btn" bindtap="buttonHandler">取消预约</button>
+    <button class="btn" bindtap="buttonHandler" data-state="{{order.state}}">修改充电信息</button>
+    <button class="btn" bindtap="buttonHandler" data-state="{{order.state}}">取消预约</button>
   </view>
   <view wx:elif="{{order.state==3}}" class="bigbox">
     <view class="cur">状态：您正在被叫号</view>
-    <button class="btn" bindtap="buttonHandler">修改充电信息</button>
-    <button class="btn" bindtap="buttonHandler">取消预约</button>
+    <button class="btn" bindtap="buttonHandler" data-state="{{order.state}}">修改充电信息</button>
+    <button class="btn" bindtap="buttonHandler" data-state="{{order.state}}">取消预约</button>
   </view>
   <view wx:elif="{{order.state==4}}" class="bigbox">
     <view class="cur">状态：正在充电</view>
-    <button class="btn" bindtap="buttonHandler">结束充电</button>
+    <button class="btn" bindtap="buttonHandler" data-state="{{order.state}}">结束充电</button>
   </view>
   <view wx:elif="{{order.state==5}}" class="bigbox">
     <view class="cur">状态：充电完成</view>
-    <button class="btn" bindtap="buttonHandler">结账</button>
+    <button class="btn" bindtap="buttonHandler" data-state="{{order.state}}">结账</button>
   </view>
 </view>
