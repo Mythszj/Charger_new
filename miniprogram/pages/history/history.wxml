@@ -32,12 +32,6 @@
                     <text class="iconfont icon-fl-xinxi"></text>
                     <text class='title'>充电费用：{{item.money}}元</text>
                 </view>
-                <!-- <view class="image_area" wx:if="{{item.image_url.length >= 1}}">
-                    <view class="img" wx:for="{{item.image_url}}" wx:key="*this" wx:for-index="index2" wx:for-item="item2" catchtap="previewImage" data-url="{{item2}}" data-list="{{item.image_url}}">
-                        <image src="{{item2}}"></image>
-                    </view>
-                    <text wx:if="{{item.image_url.length >= 4}}" class="iconfont icon-shenglvehao"></text>
-                </view> -->
             </view>
         </view>
 </view>

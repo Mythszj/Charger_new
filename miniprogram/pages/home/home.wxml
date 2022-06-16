@@ -1,24 +1,133 @@
 <view>
   <view wx:if="{{order.state==1}}" class="bigbox">
     <view class="cur">状态：当前没有操作</view>
+    <view >
+            <view class='post_list' bindtap='onItemClick'>
+                <view class="show_info">
+                    <text class="iconfont icon-fl-xinxi"></text>
+                    <text class='title'>快充：{{item.time}}元/度</text>
+                </view>
+                <view class="show_info">
+                    <text class="iconfont icon-fl-xinxi"></text>
+                    <text class='title'>慢充：{{item.last}}元/度</text>
+                </view>
+            </view>
+      </view>
     <button class="btn" bindtap="buttonHandler" data-state="{{order.state}}">我要充电</button>
   </view>
   <view wx:elif="{{order.state==2}}" class="bigbox">
     <view class="cur">状态：正在排队</view>
-    <button class="btn" bindtap="buttonHandler" data-state="{{order.state}}">修改充电信息</button>
-    <button class="btn" bindtap="buttonHandler" data-state="{{order.state}}">取消预约</button>
+    <view >
+      <view class='post_list' bindtap='onItemClick'>
+                <view class='title_area'>
+                    <!-- 用户名 + 时间 -->
+                    <view class='text_area'>
+                        <view>
+                            <text class='author_name'>订单ID：{{order.orderid}}</text>
+                            <text class="done">进行中</text>
+                        </view>
+                    </view>
+                </view>
+                <view class="divLine"></view>
+                <view class="show_info">
+                    <text class="iconfont icon-fl-xinxi"></text>
+                    <text class='title'>预约模式：快充</text>
+                </view>
+                <view class="show_info">
+                    <text class="iconfont icon-fl-xinxi"></text>
+                    <text class='title'>预约充电度数：{{order.degree}}度</text>
+                </view>
+                <view class="show_info">
+                    <text class="iconfont icon-fl-xinxi"></text>
+                    <text class='title'>前面排队人数：{{order.ahead}}位</text>
+                </view>
+            </view>
+      </view>
+    <view class="queue">
+      <button class="q_btn" bindtap="buttonHandler" data-state="{{order.state}}" data-btnid="{{1}}">修改充电信息</button>
+    <button class="q_btn q_spe" bindtap="buttonHandler" data-state="{{order.state}}" data-btnid="{{2}}">取消预约</button>
+    </view>
   </view>
   <view wx:elif="{{order.state==3}}" class="bigbox">
     <view class="cur">状态：您正在被叫号</view>
-    <button class="btn" bindtap="buttonHandler" data-state="{{order.state}}">修改充电信息</button>
-    <button class="btn" bindtap="buttonHandler" data-state="{{order.state}}">取消预约</button>
+    <view>
+      <view class='post_list' bindtap='onItemClick'>
+                <view class='title_area'>
+                    <!-- 用户名 + 时间 -->
+                    <view class='text_area'>
+                        <view>
+                            <text class='author_name'>订单ID：{{order.orderid}}</text>
+                            <text class="done">进行中</text>
+                        </view>
+                    </view>
+                </view>
+                <view class="divLine"></view>
+                <view class="show_info">
+                    <text class="iconfont icon-fl-xinxi"></text>
+                    <text class='title'>预约模式：快充</text>
+                </view>
+                <view class="show_info">
+                    <text class="iconfont icon-fl-xinxi"></text>
+                    <text class='title'>预约充电度数：{{order.degree}}度</text>
+                </view>
+                <view class="show_info">
+                    <text class="iconfont icon-fl-xinxi"></text>
+                    <text class='title'>前面排队人数：{{order.ahead}}位</text>
+                </view>
+            </view>
+    </view>
+    <button class="btn btn_3" bindtap="buttonHandler" data-state="{{order.state}}">取消预约</button>
   </view>
   <view wx:elif="{{order.state==4}}" class="bigbox">
     <view class="cur">状态：正在充电</view>
-    <button class="btn" bindtap="buttonHandler" data-state="{{order.state}}">结束充电</button>
+    <view class='post_list' bindtap='onItemClick'>
+                <view class='title_area'>
+                    <!-- 用户名 + 时间 -->
+                    <view class='text_area'>
+                        <view>
+                            <text class='author_name'>订单ID：{{order.orderid}}</text>
+                            <text class="done">进行中</text>
+                        </view>
+                    </view>
+                </view>
+                <view class="divLine"></view>
+                <view class="show_info">
+                    <text class="iconfont icon-fl-xinxi"></text>
+                    <text class='title'>已经充电：{{item.already}}度</text>
+                </view>
+                <view class="show_info">
+                    <text class="iconfont icon-fl-xinxi"></text>
+                    <text class='title'>还要充电：{{item.left}}度</text>
+                </view>
+                <view class="show_info">
+                    <text class="iconfont icon-fl-xinxi"></text>
+                    <text class='title'>已经花费：{{item.spent}}元</text>
+                </view>
+            </view>
+    <button class="btn btn_3" bindtap="buttonHandler" data-state="{{order.state}}">结束充电</button>
   </view>
   <view wx:elif="{{order.state==5}}" class="bigbox">
     <view class="cur">状态：充电完成</view>
+    <view class='post_list' bindtap='onItemClick'>
+                <view class='title_area'>
+                    <!-- 用户名 + 时间 -->
+                    <view class='text_area'>
+                        <view>
+                            <text class='author_name'>订单ID：{{order.orderid}}</text>
+                            <text class="done">已完成</text>
+                        </view>
+                    </view>
+                </view>
+                <view class="divLine"></view>
+                <view class="show_info">
+                    <text class="iconfont icon-fl-xinxi"></text>
+                    <text class='title'>总计充电：{{item.left}}度</text>
+                </view>
+                <view class="show_info">
+                    <text class="iconfont icon-fl-xinxi"></text>
+                    <text class='title'>总计花费：{{item.spent}}元</text>
+                </view>
+            </view>
     <button class="btn" bindtap="buttonHandler" data-state="{{order.state}}">结账</button>
   </view>
 </view>
