@@ -1,8 +1,17 @@
 Page({
+  data: {
+    order: {},
+  },
+
   buttonHandler(event) {
-    wx.navigateTo({
-      url: '../fill/fill',
-    });
+    console.log(event)
+    let state = event.currentTarget.dataset.state
+    console.log(state)
+    if (state == 1) {
+      wx.navigateTo({
+        url: '../fill/fill',
+      });
+    }
   },
 
   // 页面显示
@@ -36,5 +45,9 @@ Page({
     }
 
     let order = wx.getStorageSync('order')
+    order.state = 2;
+    this.setData({
+      order
+    })
   },
 });

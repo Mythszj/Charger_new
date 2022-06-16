@@ -1,5 +1,32 @@
 /* pages/home/home.wxss */
-page {
-    padding-bottom: 150rpx;
+  page {
+      padding-bottom: 120rpx;
+    }
+
+  .bigbox {
+    margin-top: 160rpx;
+    display: flex;
+    flex-direction: column;
+    justify-content: space-around;
+    align-items: center;
+  }
+
+  .cur {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    font-size: 60rpx;
+  }
+
+  .btn {
+    margin-top: 100rpx;
+    width: 450rpx;
+    height: 450rpx;
     background-color: #A3DEF0;
+    color: white;
+    border-radius: 50%;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    font-size: 64rpx;
   }
