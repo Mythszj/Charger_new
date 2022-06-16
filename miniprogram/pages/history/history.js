@@ -10,7 +10,7 @@ Page({
     // 是否有搜索，显示 相关信息
     noSearch: true,
     // 所有的帖子
-    postlist: [{'orderId': '100104', time: '2018-07-05 10:53:06', last:'14', degree: '0.2',money:'0.32'}],
+    postlist: [],
     // 搜索到用户的信息
     userlist: [],
     // 轮播图
@@ -18,7 +18,12 @@ Page({
     commentLoaded: false,
     inputValue: ''
   },
-
+  onShow:function(e){
+    let postlist=wx.getStorageSync('record');
+    this.setData({
+      postlist
+    })
+  },
   // 发送评论
   sendComment: function (e) {
     console.log(e)
