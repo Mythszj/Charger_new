@@ -14,10 +14,5 @@ App({
         // 发送 res.code 到后台换取 openId, sessionKey, unionId
       }
     })
-
-    this.getDeviceSize().then(res => {
-      const {bottomLift} = res
-      this.globalData.bottomLift = bottomLift
-    })
   },
 });

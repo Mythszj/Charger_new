@@ -1,1 +1,9 @@
 @import '/miniprogram_npm/weui-miniprogram/weui-wxss/dist/style/weui.wxss';
+/* 注意引入的路径，要带一个./ */
+@import "/styles/iconfont.wxss";
+
+page, view, text, swiper, swiper-item, image, navigator {
+    padding: 0;
+    margin: 0;
+    box-sizing: border-box;
+}

@@ -35,7 +35,9 @@ Page({
                   .then(res => {
                       console.log("获取到用户id", res);
                       // 将用户的 openId放入到 userInfo中
-                      userInfo.openId = res.result.openId;
+                      userInfo.openId = res.result.openid;
+                      console.log(res.result.openid)
+                      console.log(userInfo.openId)
                       // 将用户的个人信息存到缓存中
                       wx.setStorageSync('userInfo', userInfo);
                       // 用于页面渲染

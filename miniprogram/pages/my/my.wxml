@@ -25,13 +25,9 @@
         <navigator url="/pages/mydetail/mydetail?pageId=2" class="app_info_item">我的评论</navigator>
     </view>
     <view class="mine">
-        <navigator class="app_info_item">
-            捐赠 && 捐赠记录
+        <navigator class="app_info_item" url="/pages/history/history">
+            历史记录
         </navigator>
-    </view>
-    <view class="mine contact">
-        联系客服
-        <button open-type="feedback"></button>
     </view>
     <view class="mine">
         <navigator class="app_info_item" url="/pages/about/about">

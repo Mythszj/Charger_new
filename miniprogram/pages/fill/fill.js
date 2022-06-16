@@ -73,6 +73,11 @@ Page({
       }
     });
   },
+  formInputChange(event) {
+    console.log(event)
+    let degree = event.detail.value
+    console.log(degree)
+  },
   restForm(event) {
     wx.navigateBack({
       delta: 0,

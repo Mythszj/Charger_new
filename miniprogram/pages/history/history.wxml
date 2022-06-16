@@ -1,2 +1,43 @@
-<!--pages/history/history.wxml-->
-<text>#100104\n充电时间:2018-07-05 10:53:21\n充电时长:总计12分钟\n充电电量:0.9度\n充电费用:5.33元\n\n#100105\n......这里最好搞一个卡片列表</text>
+<!-- 主页 -->
+<view class="body">
+    <!-- 帖子 -->
+    <view class="search_info_text" wx:if="{{noSearch == false}}">帖子列表</view>
+        <view wx:for="{{postlist}}" wx:key="_id">
+            <!-- <view class="divLine"></view> -->
+            <!-- 下面传递的这个id是数据库自动添加的用来表示不同帖子的id -->
+            <view class='post_list' bindtap='onItemClick'>
+                <view class='title_area'>
+                    <!-- 用户名 + 时间 -->
+                    <view class='text_area'>
+                        <view>
+                            <text class='author_name'>订单ID：{{item.orderId}}</text>
+                            <text class="done">已完成</text>
+                        </view>
+                    </view>
+                </view>
+                <view class="divLine"></view>
+                <view class="show_info">
+                    <text class="iconfont icon-fl-xinxi"></text>
+                    <text class='title'>充电时间：{{item.time}}</text>
+                </view>
+                <view class="show_info">
+                    <text class="iconfont icon-fl-xinxi"></text>
+                    <text class='title'>充电时长：{{item.last}}分钟</text>
+                </view>
+                <view class="show_info">
+                    <text class="iconfont icon-fl-xinxi"></text>
+                    <text class='title'>充电电量：{{item.degree}}度</text>
+                </view>
+                <view class="show_info">
+                    <text class="iconfont icon-fl-xinxi"></text>
+                    <text class='title'>充电费用：{{item.money}}元</text>
+                </view>
+                <!-- <view class="image_area" wx:if="{{item.image_url.length >= 1}}">
+                    <view class="img" wx:for="{{item.image_url}}" wx:key="*this" wx:for-index="index2" wx:for-item="item2" catchtap="previewImage" data-url="{{item2}}" data-list="{{item.image_url}}">
+                        <image src="{{item2}}"></image>
+                    </view>
+                    <text wx:if="{{item.image_url.length >= 4}}" class="iconfont icon-shenglvehao"></text>
+                </view> -->
+            </view>
+        </view>
+</view>
