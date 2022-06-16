@@ -1,8 +1,0 @@
-/* pages/home/home.wxss */
-page {
-  height: 100%;
-  width: 750rpx;
-  display: flex;
-  justify-content: center;
-  align-items: center;
-}
