@@ -1,4 +1,8 @@
 Page({
+  data: {
+    order: {},
+  },
+
   buttonHandler(event) {
     wx.navigateTo({
       url: '../fill/fill',
@@ -35,6 +39,9 @@ Page({
       })
     }
 
-    order = wx.getStorageSync('order')
+    let order = wx.getStorageSync('order')
+    this.setData({
+      order
+    })
   },
 });
