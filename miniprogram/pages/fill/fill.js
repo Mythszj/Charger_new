@@ -11,20 +11,12 @@ Page({
         value: '1'
       }
     ],
-    checkboxItems: [{
-        name: 'standard is dealt for u.',
-        value: '0',
-        checked: true
-      },
-      {
-        name: 'standard is dealicient for u.',
-        value: '1'
-      }
-    ],
+    isfast: 0,//是否是快充
+    degree: 0,//充电度数
   },
   radioChange: function (e) {
-    console.log('radio发生change事件，携带value值为：', e.detail.value);
-
+    let isfast=e.detail.value;
+    console.log(isfast);
     var radioItems = this.data.radioItems;
     for (var i = 0, len = radioItems.length; i < len; ++i) {
       radioItems[i].checked = radioItems[i].value == e.detail.value;
@@ -35,27 +27,6 @@ Page({
       [`formData.radio`]: e.detail.value
     });
   },
-  checkboxChange: function (e) {
-    console.log('checkbox发生change事件，携带value值为：', e.detail.value);
-
-    var checkboxItems = this.data.checkboxItems,
-      values = e.detail.value;
-    for (var i = 0, lenI = checkboxItems.length; i < lenI; ++i) {
-      checkboxItems[i].checked = false;
-
-      for (var j = 0, lenJ = values.length; j < lenJ; ++j) {
-        if (checkboxItems[i].value == values[j]) {
-          checkboxItems[i].checked = true;
-          break;
-        }
-      }
-    }
-
-    this.setData({
-      checkboxItems: checkboxItems,
-      [`formData.checkbox`]: e.detail.value
-    });
-  },
   submitForm(event) {
     const that = this;
     wx.showModal({
@@ -63,6 +34,26 @@ Page({
       success(res) {
         if (res.confirm) {
           /*TODO：获取页面中的表单，将预约请求发送给服务器*/
+          let weixinid=wx.getStorageSync('userInfo').openId;//获取微信id
+          /*将预约信息发送给服务器*/
+          wx.request({
+            header: {
+              　　"Content-Type": "application/x-www-form-urlencoded;charset=utf-8"
+              　　},
+            url: wx.getStorage('userInfo').openId,
+            method: 'GET',
+            data:{
+              userId:"liangg",
+              isFast:isfast,
+              degree:degree
+            },
+            //成功回调函数
+            success:(res)=>{
+              console.log(res)
+            }
+          })
+          /*弹出“预约成功”*/
+          console.log(weixinid);
           wx.showToast({
             title: '预约成功!',
             duration: 700
@@ -73,14 +64,13 @@ Page({
       }
     });
   },
-  formInputChange(event) {
-    console.log(event)
-    let degree = event.detail.value
-    console.log(degree)
-  },
   restForm(event) {
     wx.navigateBack({
       delta: 0,
     });
+  },
+  formInputChange(event){
+    let degree=event.detail.value;
+    console.log(degree);
   }
 });
