@@ -3,7 +3,34 @@ Page({
   data: {
       // 用户信息
       userInfo: {},
-      order: {}
+      order: {},
+      // 历史记录信息列表
+      record:[]
+  },
+
+  historytap(event) {
+    // 点击历史记录时，向服务器请求历史信息
+    wx.request({
+      header: {
+        　　"Content-Type": "application/x-www-form-urlencoded;charset=utf-8"
+        　　},
+      url: wx.getStorage(url)+'/user/lookUpChargeHistory',
+      method: 'POST',
+      data:{
+        weixinid: userInfo.openId
+      },
+      //成功回调函数
+      success:(res)=>{
+        console.log("服务器返回的历史记录",res);
+        const{record}=res.data;
+        // 将历史记录信息存到缓存中
+        wx.setStorageSync('record', record);
+        // 用于页面渲染
+        this.setData({
+            record
+        })
+      }
+    })
   },
 
   onShow() {

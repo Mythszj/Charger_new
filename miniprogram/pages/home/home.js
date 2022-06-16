@@ -35,6 +35,6 @@ Page({
       })
     }
 
-    order = wx.getStorageSync('order')
+    let order = wx.getStorageSync('order')
   },
 });

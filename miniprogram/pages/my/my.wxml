@@ -25,7 +25,7 @@
         <navigator url="/pages/mydetail/mydetail?pageId=2" class="app_info_item">我的评论</navigator>
     </view>
     <view class="mine">
-        <navigator class="app_info_item" url="/pages/history/history">
+        <navigator class="app_info_item" url="/pages/history/history" bindtap="historytap">
             历史记录
         </navigator>
     </view>
