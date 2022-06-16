@@ -34,5 +34,7 @@ Page({
         url: '/pages/my/my',
       })
     }
+
+    order = wx.getStorageSync('order')
   },
 });

@@ -1,1 +1,5 @@
 /* pages/home/home.wxss */
+page {
+    padding-bottom: 150rpx;
+    background-color: #A3DEF0;
+  }

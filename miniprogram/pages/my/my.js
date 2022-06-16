@@ -2,7 +2,8 @@
 Page({
   data: {
       // 用户信息
-      userInfo: {}
+      userInfo: {},
+      order: {}
   },
 
   onShow() {
@@ -42,48 +43,17 @@ Page({
                       this.setData({
                           userInfo
                       })
-
-                      // 先看用户数据库中有没有用户的信息
-                      wx.cloud.database().collection('user_collection_c')
-                          .where({
-                              user_id: userInfo.openId
-                          })
-                          .get()
-                          .then(res => {
-                              console.log('用户数据库的信息', res);
-                              // 如果返回的数组长度为0，说明用户还没被添加到数据库
-                              if (res.data.length === 0) {
-                                  wx.cloud.callFunction({
-                                      name: 'add_user_c',
-                                      data: {
-                                          // 用户名
-                                          user_name: userInfo.nickName,
-                                          // 用户头像
-                                          user_avatar_url: userInfo.avatarUrl,
-                                          // 用户地区
-                                          user_position: userInfo.country + " " + userInfo.province + " " + userInfo.city
-                                      }
-                                  })
-                                      .then(res => {
-                                          console.log('添加用户成功', res);
-                                          wx.switchTab({
-                                              url: '/pages/index/index',
-                                          })
-                                      })
-                                      .catch(err => {
-                                          console.error('添加用户失败', err);
-                                      })
-                              }
-                              else {
-                                  console.log('数据库中已经存在该用户的信息了');
-                                  wx.switchTab({
-                                      url: '/pages/index/index',
-                                  })
-                              }
-                          })
-                          .catch(err => {
-                              console.log('没有获取到用户数据库的信息', err)
-                          });
+                      let order = {};
+                      order.state = 1;
+                      order.weixinid = userInfo.openId;
+                      order.isfast = 0;
+                      order.degree = 0;
+                      order.orderid = '';
+                      order.ahead = 0;
+                      order.already = 0;
+                      order.left = 0;
+                      order.spent = 0;
+                      wx.setStorageSync('order', order)
                   })
                   .catch(err => {
                       console.error("没获取用户id", err);
