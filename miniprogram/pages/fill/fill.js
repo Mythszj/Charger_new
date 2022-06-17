@@ -58,8 +58,8 @@ Page({
               console.log(res)
               let order = getStorageSync('order');
               order.orderid = res.data.orderid; //更新orderid
-              order.isfast = that.data.isfast;
-              order.degree = that.data.degree;
+              order.isfast = that.data.isfast;//更新快充慢充
+              order.degree = that.data.degree;//更新充电度数
               order.state = 2; //成功预约后，进入状态2
               wx.setStorageSync('order', order); //更新缓存中的order
             },

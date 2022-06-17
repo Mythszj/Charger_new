@@ -31,7 +31,8 @@
                 <view class="divLine"></view>
                 <view class="show_info">
                     <text class="iconfont icon-fl-xinxi"></text>
-                    <text class='title'>预约模式：快充</text>
+                    <!-- todo：如果isfast为1显示快充，否则显示慢充 -->
+                    <text class='title'>预约模式：{{order.isfast}}</text>
                 </view>
                 <view class="show_info">
                     <text class="iconfont icon-fl-xinxi"></text>
@@ -49,7 +50,7 @@
     </view>
   </view>
   <view wx:elif="{{order.state==3}}" class="bigbox">
-    <view class="cur">状态：您正在被叫号</view>
+    <view class="cur">请到{{order.chargeid}}号充电桩充电</view>
     <view>
       <view class='post_list' bindtap='onItemClick'>
                 <view class='title_area'>
@@ -70,10 +71,6 @@
                     <text class="iconfont icon-fl-xinxi"></text>
                     <text class='title'>预约充电度数：{{order.degree}}度</text>
                 </view>
-                <view class="show_info">
-                    <text class="iconfont icon-fl-xinxi"></text>
-                    <text class='title'>前面排队人数：{{order.ahead}}位</text>
-                </view>
             </view>
     </view>
     <button class="btn btn_3" bindtap="buttonHandler" data-state="{{order.state}}">取消预约</button>
@@ -93,15 +90,15 @@
                 <view class="divLine"></view>
                 <view class="show_info">
                     <text class="iconfont icon-fl-xinxi"></text>
-                    <text class='title'>已经充电：{{item.already}}度</text>
+                    <text class='title'>已经充电：{{order.already}}度</text>
                 </view>
                 <view class="show_info">
                     <text class="iconfont icon-fl-xinxi"></text>
-                    <text class='title'>还要充电：{{item.left}}度</text>
+                    <text class='title'>还要充电：{{order.left}}度</text>
                 </view>
                 <view class="show_info">
                     <text class="iconfont icon-fl-xinxi"></text>
-                    <text class='title'>已经花费：{{item.spent}}元</text>
+                    <text class='title'>已经花费：{{order.spent}}元</text>
                 </view>
             </view>
     <button class="btn btn_3" bindtap="buttonHandler" data-state="{{order.state}}">结束充电</button>
@@ -121,11 +118,11 @@
                 <view class="divLine"></view>
                 <view class="show_info">
                     <text class="iconfont icon-fl-xinxi"></text>
-                    <text class='title'>总计充电：{{item.left}}度</text>
+                    <text class='title'>总计充电：{{order.left}}度</text>
                 </view>
                 <view class="show_info">
                     <text class="iconfont icon-fl-xinxi"></text>
-                    <text class='title'>总计花费：{{item.spent}}元</text>
+                    <text class='title'>总计花费：{{order.spent}}元</text>
                 </view>
             </view>
     <button class="btn" bindtap="buttonHandler" data-state="{{order.state}}">结账</button>

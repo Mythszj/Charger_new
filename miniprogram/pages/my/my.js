@@ -104,11 +104,12 @@ Page({
                         order.weixinid = userInfo.openId;
                         order.isfast = 0;
                         order.degree = 0;
-                        order.orderid = '';
+                        order.orderid = 10001;
                         order.ahead = 0;
                         order.already = 0;
                         order.left = 0;
                         order.spent = 0;
+                        order.chargeid = 0;
                         wx.setStorageSync('order', order)
                     })
                     .catch(err => {
