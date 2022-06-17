@@ -31,8 +31,9 @@
                 <view class="divLine"></view>
                 <view class="show_info">
                     <text class="iconfont icon-fl-xinxi"></text>
-                    <!-- todo：如果isfast为1显示快充，否则显示慢充 -->
-                    <text class='title'>预约模式：{{order.isfast}}</text>
+                    <!-- done todo：如果isfast为1显示快充，否则显示慢充 -->
+                    <text class='title' wx:if="{{order.isfast==1}}">预约模式：快充</text>
+                    <text class='title' wx:else>预约模式：慢充</text>
                 </view>
                 <view class="show_info">
                     <text class="iconfont icon-fl-xinxi"></text>

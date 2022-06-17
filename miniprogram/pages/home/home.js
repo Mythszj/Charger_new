@@ -198,7 +198,7 @@ Page({
     }
     //获取缓存中的order，更新
     let order = wx.getStorageSync('order')
-    order.state = 5;
+    order.state = 2;
     this.setData({
       order
     })
