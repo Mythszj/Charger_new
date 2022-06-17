@@ -5,11 +5,11 @@
             <view class='post_list' bindtap='onItemClick'>
                 <view class="show_info">
                     <text class="iconfont icon-fl-xinxi"></text>
-                    <text class='title'>快充：{{item.time}}元/度</text>
+                    <text class='title'>快充：{{item.fastprice}}元/度</text>
                 </view>
                 <view class="show_info">
                     <text class="iconfont icon-fl-xinxi"></text>
-                    <text class='title'>慢充：{{item.last}}元/度</text>
+                    <text class='title'>慢充：{{item.slowprice}}元/度</text>
                 </view>
             </view>
       </view>

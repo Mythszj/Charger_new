@@ -1,6 +1,11 @@
 Page({
   data: {
     order: {},
+    first: true,//是否是第一次进入该页面
+    item:{
+      fastprice:3,//快充价格
+      slowprice:2,//慢充价格
+    }
   },
 
   buttonHandler(event) {
@@ -25,25 +30,64 @@ Page({
       }
       // 取消预约
       else if (btnid == 2) {
-        //跳转到状态1
-        let order = this.data.order
-        order.state = 1
-        this.setData({
-          order
+        const that = this;
+        //7.取消预约
+        wx.request({
+          header: {
+            "Content-Type": "application/x-www-form-urlencoded;charset=utf-8"
+          },
+          url: wx.getStorageSync('url') + '/user/cancelOrder',
+          method: 'GET',
+          data: {
+            orderid: wx.getStorageSync('order').orderid,
+          },
+          success: (res) => {
+            console.log(res)
+            if (res.code == 200) console.log("取消成功") //取消成功
+            /*弹出提示框*/
+            wx.showToast({
+              title: '成功取消!',
+              duration: 1000
+            })
+            let order = getStorageSync('order');
+            order.state = 1; //回到状态1
+            wx.setStorageSync('order', order);
+            that.setData({
+              order
+            })
+          }
         })
-        //发送取消预约请求、
-
       }
     }
     // 叫号状态，能取消预约
     else if (state == 3) {
-      //跳转到状态1
-      let order = this.data.order
-      order.state = 1
-      this.setData({
-        order
+      const that = this;
+      //7.取消预约
+      wx.request({
+        header: {
+          "Content-Type": "application/x-www-form-urlencoded;charset=utf-8"
+        },
+        url: wx.getStorageSync('url') + '/user/cancelOrder',
+        method: 'GET',
+        data: {
+          orderid: wx.getStorageSync('order').orderid,
+        },
+        success: (res) => {
+          console.log(res)
+          if (res.code == 200) console.log("取消成功") //取消成功
+          /*弹出提示框*/
+          wx.showToast({
+            title: '成功取消!',
+            duration: 1000
+          })
+          let order = getStorageSync('order');
+          order.state = 1; //回到状态1
+          wx.setStorageSync('order', order);
+          that.setData({
+            order
+          })
+        }
       })
-      //发出取消预约请求
     }
     // 正在充电状态，能结束充电
     else if (state == 4) {
@@ -53,16 +97,30 @@ Page({
         title: '确认结束充电?',
         success(res) {
           //发送结束充电请求，收到服务区正确回复后显示Toast并跳转
-          wx.showToast({
-            title: '充电已结束!',
-            duration: 1000
-          })
           if (res.confirm) {
-            //跳转到状态5
-            let order = that.data.order
-            order.state = 5
-            that.setData({
-              order
+            //8.取消充电
+            wx.request({
+              header: {
+                "Content-Type": "application/x-www-form-urlencoded;charset=utf-8"
+              },
+              url: wx.getStorageSync('url') + '/user/cancelCharge',
+              method: 'GET',
+              data: {
+                orderid: wx.getStorageSync('order').orderid,
+              },
+              success: (res) => {
+                if (res.code == 200) console.log("成功取消充电") //取消充电
+                wx.showToast({
+                  title: '充电已结束!',
+                  duration: 1000
+                })
+                //跳转到状态5
+                let order = that.data.order
+                order.state = 5
+                that.setData({
+                  order
+                })
+              }
             })
           } else if (res.cancel) {}
         }
@@ -77,17 +135,32 @@ Page({
         title: '确认支付账单?',
         success(res) {
           //发送结束充电请求，收到服务区正确回复后跳转
-          wx.showToast({
-            title: '支付成功!',
-            duration: 1000
-          })
           if (res.confirm) {
-            //跳转到状态1
-            let order = that.data.order
-            order.state = 1
-            that.setData({
-              order
+            wx.request({
+              header: {
+                "Content-Type": "application/x-www-form-urlencoded;charset=utf-8"
+              },
+              url: wx.getStorageSync('url') + '/user/complete',
+              method: 'GET',
+              data: {
+                orderid: wx.getStorageSync('order').orderid,
+              },
+              success: (res) => {
+                console.log(res)
+                if (res.code == 200) console.log("支付成功") //支付成功
+                wx.showToast({
+                  title: '支付成功!',
+                  duration: 1000
+                })
+                //跳转到状态1
+                let order = that.data.order
+                order.state = 1
+                that.setData({
+                  order
+                })
+              }
             })
+
           } else if (res.cancel) {}
         }
       });
@@ -122,11 +195,29 @@ Page({
         url: '/pages/my/my',
       })
     }
+    if (this.data.first == true) {
+      let order = wx.getStorageSync('order')
+      this.setData({
+        order
+      })
+      let first = false
+      this.setData({
+        first
+      })
+    }
+    //不同页面显示不同信息
+    let state = this.data.order.state
+    if(state==1){
+      //获取快充和慢充的价格
+      
+    }else if(state==2){
 
-    let order = wx.getStorageSync('order')
-    order.state = 4; //测试页面
-    this.setData({
-      order
-    })
+    }else if(state==3){
+
+    }else if(state==4){
+
+    }else if(state==5){
+
+    }
   },
 });
