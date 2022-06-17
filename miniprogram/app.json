@@ -5,13 +5,15 @@
     "pages/my/my",
     "pages/fill/fill",
     "pages/history/history",
-    "pages/register/register"
+    "pages/register/register",
+    "pages/pay/pay",
+    "pages/modify/modify"
   ],
-  "window":{
-    "backgroundTextStyle":"dark",
+  "window": {
+    "backgroundTextStyle": "dark",
     "navigationBarBackgroundColor": "#A3DEF0",
     "navigationBarTitleText": "126充电桩",
-    "navigationBarTextStyle":"white",
+    "navigationBarTextStyle": "white",
     "enablePullDownRefresh": false
   },
   "tabBar": {

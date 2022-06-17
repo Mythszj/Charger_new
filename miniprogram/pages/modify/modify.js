@@ -31,15 +31,15 @@ Page({
   submitForm(event) {
     const that = this;
     wx.showModal({
-      title: '确认预约?',
+      title: '确认修改?',
       success(res) {
         if (res.confirm) {
-          /*1.从表单中获取数据，然后将预约请求发送给服务器*/
+          /*2.从表单中获取数据，然后将预约请求发送给服务器*/
           wx.request({
             header: {
               "Content-Type": "application/x-www-form-urlencoded;charset=utf-8"
             },
-            url:  wx.getStorageSync('url')+'/user/lookUpChargeHistory',
+            url: wx.getStorageSync('url') + '/user/modifyChargeInfo',
             method: 'GET',
             data: {
               weixinid: wx.getStorageSync('order').weixinid,
@@ -47,25 +47,24 @@ Page({
               degree: that.data.degree,
             },
             success: (res) => {
-              console.log("预约服务器返回信息",res)
+              console.log("预约服务器返回信息", res)
               /*收到服务器响应后弹出“预约成功”*/
               console.log(weixinid);
               wx.showToast({
-                title: '预约成功!',
+                title: '修改成功!',
                 duration: 1000
               })
               /*然后根据服务器的返回值更新order*/
               console.log(res)
               let order = getStorageSync('order');
               order.orderid = res.data.orderid; //更新orderid
-              order.isfast = that.data.isfast;//更新快充慢充
-              order.degree = that.data.degree;//更新充电度数
-              order.state = 2; //成功预约后，进入状态2
+              order.isfast = that.data.isfast;
+              order.degree = that.data.degree;
               wx.setStorageSync('order', order); //更新缓存中的order
             },
           })
         } else if (res.cancel) {
-          console.log('用户点击取消');
+          console.log("用户点击了取消")
         }
       }
     });

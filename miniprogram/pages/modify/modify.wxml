@@ -1,0 +1,33 @@
+<view class="we_form_wrap">
+  <!--
+   models:需要校验的表单数据
+   rules：表单校验的规则列表
+   prop="userName" 和 data-field="userName"的值要一样，不然验证不了
+  -->
+  <!--顶部错误提示-->
+  <mp-toptips msg="{{errorMsg}}" type="error" show="{{errorMsg}}" delay="1500"></mp-toptips>
+  <mp-form id="form" rules="{{rules}}" models="{{form}}">
+    <!-- 快充慢充 -->
+    <mp-cells title="快充or慢充">
+      <mp-checkbox-group prop="radio" multi="{{false}}" bindchange="radioChange">
+        <mp-checkbox wx:for="{{radioItems}}" wx:key="value" label="{{item.name}}" value="{{item.value}}" checked="{{item.checked}}"></mp-checkbox>
+      </mp-checkbox-group>
+    </mp-cells>
+    <!-- 输入充电度数 -->
+    <mp-cell class="form_item" prop="userName" title="预计充电度数">
+      <input bindinput="formInputChange" value="{{form.userName}}" data-field="userName" class="weui-input" placeholder="请填写充电度数" />
+    </mp-cell>
+    <!--提交按钮-->
+    <view class="submit_btn_wrap">
+      <button class="weui-btn" type="primary" bindtap="submitForm">预约充电</button>
+      <button class="weui-btn" type="warn" bindtap="restForm" plain>取消</button>
+    </view>
+  </mp-form>
+</view>
+
+<!-- <mp-cells title="快充or慢充">
+    <mp-checkbox-group prop="radio" multi="{{false}}" bindchange="radioChange">
+        <mp-checkbox wx:for="{{radioItems}}" wx:key="value" label="{{item.name}}" value="{{item.value}}" checked="{{item.checked}}"></mp-checkbox>
+    </mp-checkbox-group>
+</mp-cells>
+<button class="weui-btn" type="primary" bindtap="buttonHandler">预约充电</button> -->

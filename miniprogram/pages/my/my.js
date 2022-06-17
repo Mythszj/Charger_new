@@ -3,9 +3,7 @@ Page({
     data: {
         // 用户信息
         userInfo: {},
-        order: {},
-        // 历史记录信息列表
-        record:[]
+        order: {}
     },
   
     historytap(event) {
@@ -58,11 +56,8 @@ Page({
           }
         ]
       };
-      const{record}=res.data;
+      let record = res.data;
       wx.setStorageSync('record', record);
-      this.setData({
-                record
-            })
       console.log("历史记录内容",record);
     },
   
@@ -108,11 +103,14 @@ Page({
                         order.weixinid = userInfo.openId;
                         order.isfast = 0;
                         order.degree = 0;
-                        order.orderid = '';
+
+                        order.orderid = 10001;
                         order.ahead = 0;
                         order.already = 0;
                         order.left = 0;
                         order.spent = 0;
+
+                        order.chargeid = 0;
                         wx.setStorageSync('order', order)
                     })
                     .catch(err => {
