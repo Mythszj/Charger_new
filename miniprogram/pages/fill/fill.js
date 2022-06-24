@@ -21,13 +21,21 @@ Page({
     for (var i = 0, len = radioItems.length; i < len; ++i) {
       radioItems[i].checked = radioItems[i].value == e.detail.value;
     }
-
+    this.setData({
+      isfast
+    })
     this.setData({
       radioItems: radioItems,
       [`formData.radio`]: e.detail.value
     });
   },
-
+  formInputChange(event) {
+    let degree = event.detail.value;
+    console.log(degree);
+    this.setData({
+      degree
+    })
+  },
   submitForm(event) {
     const that = this;
     wx.showModal({
@@ -39,29 +47,34 @@ Page({
             header: {
               "Content-Type": "application/x-www-form-urlencoded;charset=utf-8"
             },
-            url:  wx.getStorageSync('url')+'/user/lookUpChargeHistory',
+            url:  wx.getStorageSync('url')+'/user/sendChargeInfo',
             method: 'GET',
             data: {
               weixinid: wx.getStorageSync('order').weixinid,
-              isfast: that.data.isfast,
+              isfast: that.data.isfast,//读取快慢冲有问题
               degree: that.data.degree,
             },
             success: (res) => {
               console.log("预约服务器返回信息",res)
               /*收到服务器响应后弹出“预约成功”*/
-              console.log(weixinid);
+              //console.log(weixinid);
               wx.showToast({
                 title: '预约成功!',
                 duration: 1000
               })
               /*然后根据服务器的返回值更新order*/
+              console.log("充电类型为",that.data.isfast)
+              console.log("充电度数为",that.data.degree)
               console.log(res)
-              let order = getStorageSync('order');
-              order.orderid = res.data.orderid; //更新orderid
+              let order = wx.getStorageSync('order');
+              order.orderid = res.data.data.orderid; //更新orderid
               order.isfast = that.data.isfast;//更新快充慢充
               order.degree = that.data.degree;//更新充电度数
               order.state = 2; //成功预约后，进入状态2
               wx.setStorageSync('order', order); //更新缓存中的order
+              wx.navigateBack({
+                delta: 0,
+              });
             },
           })
         } else if (res.cancel) {
@@ -75,8 +88,5 @@ Page({
       delta: 0,
     });
   },
-  formInputChange(event) {
-    let degree = event.detail.value;
-    console.log(degree);
-  }
+ 
 });

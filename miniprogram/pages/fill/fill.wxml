@@ -15,7 +15,7 @@
     </mp-cells>
     <!-- 输入充电度数 -->
     <mp-cell class="form_item" prop="userName" title="预计充电度数">
-      <input bindinput="formInputChange" value="{{form.userName}}" data-field="userName" class="weui-input" placeholder="请填写充电度数" />
+      <input bindinput="formInputChange" value="{{degree}}" data-field="userName" class="weui-input" placeholder="请填写充电度数" />
     </mp-cell>
     <!--提交按钮-->
     <view class="submit_btn_wrap">

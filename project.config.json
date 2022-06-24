@@ -39,7 +39,8 @@
     "useStaticServer": true,
     "showES6CompileOption": false,
     "disableUseStrict": false,
-    "useCompilerPlugins": false
+    "useCompilerPlugins": false,
+    "minifyWXML": true
   },
   "appid": "wx0b3a79e1523d49b4",
   "projectname": "Charger_new",
