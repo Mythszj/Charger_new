@@ -224,7 +224,7 @@ Page({
 
   // 页面显示
   onShow: function () {
-    console.log("onShow")
+      console.log("onShow")
     // tabBar 加入的函数
     if (typeof this.getTabBar === 'function' && this.getTabBar()) {
       this.getTabBar().setData({
@@ -255,170 +255,158 @@ Page({
     this.setData({
       order
     })
-    //不同页面显示不同信息
-    let state = this.data.order.state
-    //初始状态，查询电价
+    this.startRoll()
+  },
+
+  startRoll() {
+    this.data.queueTimer = setInterval(() => {
+      //不同页面显示不同信息
+      let state = this.data.order.state
+
+      //初始状态，查询电价
     if (state == 1) {
       //获取快充和慢充的价格
-      const that = this
-      wx.request({
-        header: {
-          "Content-Type": "application/x-www-form-urlencoded;charset=utf-8"
-        },
-        url: wx.getStorageSync('url') + '/admin/price',
-        method: 'GET',
-        success: (res) => {
-          console.log("查询价格返回值", res)
-          let fastprice = res.data.data.rapid;
-          let slowprice = res.data.data.slow;
-          that.setData({
-            fastprice,
-            slowprice
-          })
-        }
-      })
+    const that = this
+    wx.request({
+      header: {
+        "Content-Type": "application/x-www-form-urlencoded;charset=utf-8"
+      },
+      url: wx.getStorageSync('url') + '/admin/price',
+      method: 'GET',
+      success: (res) => {
+        console.log("查询价格返回值", res)
+        let fastprice = res.data.data.rapid;
+        let slowprice = res.data.data.slow;
+        that.setData({
+          fastprice,
+          slowprice
+        })
+      }
+    })
     }
     //排队状态，查询排队状态 
     else if (state == 2) {
       //3.排队查询，每1s查询一次
-      const that = this
-      that.data.queueTimer = setInterval(() => {
-        wx.request({
-          header: {
-            "Content-Type": "application/x-www-form-urlencoded;charset=utf-8"
-          },
-          url: wx.getStorageSync('url') + '/user/checkQueue',
-          method: 'GET',
-          data: {
-            orderId: that.data.order.orderid,
-            isFast: that.data.order.isfast
-          },
-          success: (res) => {
-            console.log(res)
-            if (res.data.msg == "排队中") {
-              let order = that.data.order;
-              order.ahead = res.data.data.ahead;
-              that.setData({
-                order
-              })
-            } else if (res.data.msg == "已叫号") {
-              //跳转到叫号状态
-              let order = that.data.order;
-              order.state = 3
-              order.chargeid = res.data.data.pile
-              that.setData({
-                order
-              })
-              /*关闭queuetimer*/
-              if (that.data.queueTimer != null) {
-                clearInterval(that.data.queueTimer);
-                that.setData({
-                  queueTimer: null
-                });
-              }
-            } else if (res.data.msg == "正在充电") {
-              //跳转到正在充电状态
-              let order = that.data.order;
-              order.state = 4
-              that.setData({
-                order
-              })
-              /*关闭queuetimer*/
-              if (that.data.queueTimer != null) {
-                clearInterval(that.data.queueTimer);
-                that.setData({
-                  queueTimer: null
-                });
-              }
-            }
+    const that = this
+      wx.request({
+        header: {
+          "Content-Type": "application/x-www-form-urlencoded;charset=utf-8"
+        },
+        url: wx.getStorageSync('url') + '/user/checkQueue',
+        method: 'GET',
+        data: {
+          orderId: that.data.order.orderid,
+          isFast: that.data.order.isfast
+        },
+        success: (res) => {
+          console.log(res)
+          if (res.data.msg == "排队中") {
+            let order = that.data.order;
+            order.ahead = res.data.data.ahead;
+            that.setData({
+              order
+            })
+          } else if (res.data.msg == "已叫号") {
+            //跳转到叫号状态
+            let order = that.data.order;
+            order.state = 3
+            order.chargeid = res.data.data.pile
+            that.setData({
+              order
+            })
+          } else if (res.data.msg == "正在充电") {
+            //跳转到正在充电状态
+            let order = that.data.order;
+            order.state = 4
+            that.setData({
+              order
+            })
           }
-        })
-      }, 1000)
+        }
+      })
     }
     //叫号状态，叫号查询状态
     else if (state == 3) {
       //3.叫号查询，每1s查询一次
-      const that = this
-      that.data.queueTimer = setInterval(() => {
-        wx.request({
-          header: {
-            "Content-Type": "application/x-www-form-urlencoded;charset=utf-8"
-          },
-          url: wx.getStorageSync('url') + '/user/checkQueue',
-          method: 'GET',
-          data: {
-            orderId: that.data.order.orderid,
-            isFast: that.data.order.isfast
-          },
-          success: (res) => {
-            console.log(res)
-            if (res.data.msg == "已叫号") {
-              //获取充电桩号
-              let order = that.data.order;
-              order.chargeid = res.data.chargeid;
-              that.setData({
-                order
-              })
-            } else if (res.data.msg == "正在充电") {
-              let order = that.data.order;
-              order.state = 4; //跳转到充电状态
-              that.setData({
-                order
-              })
-              wx.setStorageSync('order', order)
-            }
+    const that = this
+      wx.request({
+        header: {
+          "Content-Type": "application/x-www-form-urlencoded;charset=utf-8"
+        },
+        url: wx.getStorageSync('url') + '/user/checkQueue',
+        method: 'GET',
+        data: {
+          orderId: that.data.order.orderid,
+          isFast: that.data.order.isfast
+        },
+        success: (res) => {
+          console.log(res)
+          if (res.data.msg == "已叫号") {
+            //获取充电桩号
+            let order = that.data.order;
+            order.chargeid = res.data.data.pile;
+            wx.setStorageSync('order', order)
+            that.setData({
+              order
+            })
+          } else if (res.data.msg == "正在充电") {
+            let order = that.data.order;
+            order.state = 4; //跳转到充电状态
+            that.setData({
+              order
+            })
+            wx.setStorageSync('order', order)
           }
-        })
-      }, 1000)
+        }
+      })
     }
     //充电状态，查询充电状态
     else if (state == 4) {
       /*发送查询充电状态请求*/
-      const that = this;
-      that.data.chargeTimer = setInterval(() => {
-        wx.request({
-          header: {
-            "Content-Type": "application/x-www-form-urlencoded;charset=utf-8"
-          },
-          url: wx.getStorageSync('url') + '/user/lookUpChargeInfo',
-          method: 'GET',
-          data: {
-            orderid: wx.getStorageSync('order').orderid,
-          },
-          success: (res) => {
-            console.log(res)
-            if (res.data.msg == "充电中") {
-              let order = that.data.order;
-              order.already = res.data.data.already; //已充电
-              order.left = res.data.data.left; //剩余电
-              order.spent = res.data.data.spent; //已花钱
-              // 改为保留两位小数
-              order.spent = order.spent.toFixed(2)
-              order.left = order.left.toFixed(2)
-              order.already = order.already.toFixed(2)
-              that.setData({
-                order
-              })
-            } else if (res.data.msg == "充电完成") {
-              let order = that.data.order;
-              order.already = res.data.data.already; //已充电
-              order.left = res.data.data.left; //剩余电
-              order.spent = res.data.data.spent; //已花钱
-              order.state = 5; //跳转到支付界面
-              // 改为保留两位小数
-              order.spent = order.spent.toFixed(2)
-              order.left = order.left.toFixed(2)
-              order.already = order.already.toFixed(2)
-              that.setData({
-                order
-              })
-            }
+    const that = this;
+      wx.request({
+        header: {
+          "Content-Type": "application/x-www-form-urlencoded;charset=utf-8"
+        },
+        url: wx.getStorageSync('url') + '/user/lookUpChargeInfo',
+        method: 'GET',
+        data: {
+          orderid: wx.getStorageSync('order').orderid,
+        },
+        success: (res) => {
+          console.log(res)
+          if (res.data.msg == "充电中") {
+            let order = that.data.order;
+            order.already = res.data.data.already; //已充电
+            order.left = res.data.data.left; //剩余电
+            order.spent = res.data.data.spent; //已花钱
+            // 改为保留两位小数
+            order.spent = order.spent.toFixed(2)
+            order.left = order.left.toFixed(2)
+            order.already = order.already.toFixed(2)
+            that.setData({
+              order
+            })
+          } else if (res.data.msg == "充电完成") {
+            let order = that.data.order;
+            order.already = res.data.data.already; //已充电
+            order.left = res.data.data.left; //剩余电
+            order.spent = res.data.data.spent; //已花钱
+            order.state = 5; //跳转到支付界面
+            // 改为保留两位小数
+            order.spent = order.spent.toFixed(2)
+            order.left = order.left.toFixed(2)
+            order.already = order.already.toFixed(2)
+            that.setData({
+              order
+            })
           }
-        })
-      }, 1000)
+        }
+      })
     }
     //支付状态 
     else if (state == 5) {}
+    },1000)
   },
 
   // 离开页面
@@ -440,6 +428,4 @@ Page({
       });
     }
   },
-
-
 });

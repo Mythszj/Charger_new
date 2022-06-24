@@ -19,11 +19,7 @@
 </view>
 <!-- 主页功能部分 -->
 <view class="content">
-    <view class="mine">
-        <navigator url="/pages/mydetail/mydetail?pageId=0" class="app_info_item">我的帖子</navigator>
-        <navigator url="/pages/mydetail/mydetail?pageId=1" class="app_info_item">我的收藏</navigator>
-        <navigator url="/pages/mydetail/mydetail?pageId=2" class="app_info_item">我的评论</navigator>
-    </view>
+    
     <view class="mine">
         <navigator class="app_info_item" url="/pages/history/history" bindtap="historytap">
             历史记录

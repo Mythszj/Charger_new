@@ -21,7 +21,7 @@
   }
 
   .btn {
-    margin-top: 120rpx;
+    margin-top: 100rpx;
     width: 500rpx;
     height: 500rpx;
     background-color: #fff;
@@ -38,6 +38,10 @@
     display: flex;
     justify-content: center;
     align-items: center;
+  }
+
+  .price {
+    margin-left: 60rpx;
   }
 
   .q_btn {
@@ -190,7 +194,7 @@
   .post_list{
     margin: 26rpx;
     margin-bottom: 35rpx;
-    margin-top: 100rpx;
+    margin-top: 90rpx;
     /* margin: 10rpx; */
     position: relative;
     background-color: #fff;
@@ -292,6 +296,7 @@
   
   .title{
     padding: 20rpx;
+    padding-left: 10rpx;
     width: 600rpx;
     font-size: 36rpx;
     font-weight: 500;
@@ -416,6 +421,6 @@
 
   .show_info .icon-fl-xinxi {
     font-size: 39rpx;
-    padding-top: 16rpx;
+    padding-top: 18rpx;
     padding-left: 15rpx;
   }

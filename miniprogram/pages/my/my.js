@@ -22,8 +22,13 @@ Page({
       //成功回调函数
       success:(res)=>{
         console.log("服务器返回的历史记录",res);
-        let record=res.data.data;
+        let oldrecord=res.data.Data;
         // 将历史记录信息存到缓存中
+        let record=oldrecord.map(item => {
+          let newitem=item
+          newitem.degree=item.degree.toFixed(2)
+          return newitem
+        });
         wx.setStorageSync('record', record);
         console.log("历史记录内容", record);
         // 用于页面渲染

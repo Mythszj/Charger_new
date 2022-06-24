@@ -5,11 +5,16 @@
             <view class='post_list' bindtap='onItemClick'>
                 <view class="show_info">
                     <text class="iconfont icon-fl-xinxi"></text>
-                    <text class='title'>快充：{{fastprice}}元/度</text>
+                    <text class='title'>计费费率</text>
+                </view>
+                <view class="price">
+                    <view>峰时：1.0元/度（10:00-15:00, 18:00-21:00）</view>
+                    <view>平时：0.7元/度（其余时段）</view>
+                    <view>平时：0.4元/度（23:00-次日7:00）</view>
                 </view>
                 <view class="show_info">
                     <text class="iconfont icon-fl-xinxi"></text>
-                    <text class='title'>慢充：{{slowprice}}元/度</text>
+                    <text class='title'>服务费单价：0.8元/度</text>
                 </view>
             </view>
       </view>
